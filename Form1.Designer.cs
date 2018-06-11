@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.도서관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.사용자관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -63,16 +63,17 @@
             this.bookBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.borrowedNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.phoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.borrowedNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.대여기록ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -89,10 +90,11 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.도서관리ToolStripMenuItem,
-            this.사용자관리ToolStripMenuItem});
+            this.toolStripMenuItem1,
+            this.대여기록ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1104, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1104, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,17 +102,16 @@
             // 
             this.도서관리ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.도서관리ToolStripMenuItem.Name = "도서관리ToolStripMenuItem";
-            this.도서관리ToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.도서관리ToolStripMenuItem.Size = new System.Drawing.Size(83, 24);
             this.도서관리ToolStripMenuItem.Text = "도서 관리";
             this.도서관리ToolStripMenuItem.Click += new System.EventHandler(this.도서관리ToolStripMenuItem_Click);
             // 
-            // 사용자관리ToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.사용자관리ToolStripMenuItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.사용자관리ToolStripMenuItem.Name = "사용자관리ToolStripMenuItem";
-            this.사용자관리ToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.사용자관리ToolStripMenuItem.Text = "사용자 관리";
-            this.사용자관리ToolStripMenuItem.Click += new System.EventHandler(this.사용자관리ToolStripMenuItem_Click);
+            this.toolStripMenuItem1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(98, 24);
+            this.toolStripMenuItem1.Text = "사용자 관리";
             // 
             // groupBox1
             // 
@@ -420,6 +421,30 @@
             dataGridView2.TabIndex = 1;
             dataGridView2.CurrentCellChanged += new System.EventHandler(dataGridView2_CurrentCellChanged);
             // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            // 
+            // phoneDataGridViewTextBoxColumn
+            // 
+            this.phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
+            this.phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
+            this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
+            // 
+            // borrowedNumberDataGridViewTextBoxColumn
+            // 
+            this.borrowedNumberDataGridViewTextBoxColumn.DataPropertyName = "borrowedNumber";
+            this.borrowedNumberDataGridViewTextBoxColumn.HeaderText = "borrowedNumber";
+            this.borrowedNumberDataGridViewTextBoxColumn.Name = "borrowedNumberDataGridViewTextBoxColumn";
+            // 
             // userBindingSource
             // 
             this.userBindingSource.DataSource = typeof(LibrarySystem.User);
@@ -471,29 +496,12 @@
             this.textBox4.Size = new System.Drawing.Size(402, 25);
             this.textBox4.TabIndex = 0;
             // 
-            // idDataGridViewTextBoxColumn
+            // 대여기록ToolStripMenuItem
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            // 
-            // nameDataGridViewTextBoxColumn1
-            // 
-            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
-            // 
-            // phoneDataGridViewTextBoxColumn
-            // 
-            this.phoneDataGridViewTextBoxColumn.DataPropertyName = "Phone";
-            this.phoneDataGridViewTextBoxColumn.HeaderText = "Phone";
-            this.phoneDataGridViewTextBoxColumn.Name = "phoneDataGridViewTextBoxColumn";
-            // 
-            // borrowedNumberDataGridViewTextBoxColumn
-            // 
-            this.borrowedNumberDataGridViewTextBoxColumn.DataPropertyName = "borrowedNumber";
-            this.borrowedNumberDataGridViewTextBoxColumn.HeaderText = "borrowedNumber";
-            this.borrowedNumberDataGridViewTextBoxColumn.Name = "borrowedNumberDataGridViewTextBoxColumn";
+            this.대여기록ToolStripMenuItem.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.대여기록ToolStripMenuItem.Name = "대여기록ToolStripMenuItem";
+            this.대여기록ToolStripMenuItem.Size = new System.Drawing.Size(86, 24);
+            this.대여기록ToolStripMenuItem.Text = "대여 기록";
             // 
             // Form1
             // 
@@ -532,7 +540,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 도서관리ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 사용자관리ToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -572,6 +579,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn borrowedNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 대여기록ToolStripMenuItem;
         public static System.Windows.Forms.DataGridView dataGridView1;
         public static System.Windows.Forms.DataGridView dataGridView2;
     }

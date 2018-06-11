@@ -82,12 +82,14 @@ namespace LibrarySystem
                 currencyManagerBook.Refresh();
 
                 Form1.currencyManagerBook.Refresh();
-
                 
-            
+               
 
 
-                
+
+
+
+
 
             } catch(Exception exception)
             {

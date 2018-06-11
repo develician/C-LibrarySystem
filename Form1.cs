@@ -69,6 +69,13 @@ namespace LibrarySystem
             comboBox1.Items.Add("출판사");
 
             comboBox1.SelectedIndex = 0;
+
+            toolStripMenuItem1.Click += 사용자관리ToolStripMenuItem_Click;
+            대여기록ToolStripMenuItem.Click += (sender, e) =>
+            {
+                BorrowedHistoryForm form = new BorrowedHistoryForm();
+                form.Show();
+            };
         }
 
         private void initialize_book_dataSource(object sender, EventArgs e)
@@ -267,6 +274,16 @@ namespace LibrarySystem
                     return;
                 }
 
+                BorrowedHistory borrowedHistory = new BorrowedHistory()
+                {
+                    UserName = user.Name,
+                    BorrowedAt = DateTime.Now,
+                    BookName = book.Name,
+                    BookIsbn = book.Isbn
+                };
+
+                DataManager.borrowedHistories.Add(borrowedHistory);
+
                 book.UserId = user.Id;
                 book.UserName = user.Name;
                 book.isBorrowed = true;
@@ -306,6 +323,16 @@ namespace LibrarySystem
                     book.isBorrowed = false;
                     book.BorrowedAt = new DateTime();
                     user.borrowedNumber = user.borrowedNumber - 1;
+
+                    ReturnedHistory returnedHistory = new ReturnedHistory()
+                    {
+                        UserName = user.Name,
+                        BookIsbn = book.Isbn,
+                        BookName = book.Name,
+                        ReturnedAt = DateTime.Now
+                    };
+
+                    DataManager.returnedHistories.Add(returnedHistory);
 
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = DataManager.Books;
@@ -349,5 +376,7 @@ namespace LibrarySystem
         {
             
         }
+
+        
     }
 }
