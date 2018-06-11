@@ -49,12 +49,138 @@ namespace LibrarySystem
 
             dataGridView2.Columns[0].HeaderText = "회원 Id";
             dataGridView2.Columns[1].HeaderText = "회원 이름";
-            //dataGridView1.CurrentCellChanged += dataGridView1_CurrentCellChanged;
-            //dataGridView2.CurrentCellChanged += dataGridView2_CurrentCellChanged;
+
+            dataGridView1.CurrentCellChanged += dataGridView1_CurrentCellChanged;
+            dataGridView2.CurrentCellChanged += dataGridView2_CurrentCellChanged;
 
             //button1.Click += button1_Click;
             //button2.Click += button2_Click;
+            button3.Click += button3_click;
 
+            textBox4.KeyDown += search_keydown;
+
+            button4.Click += initialize_book_dataSource;
+
+
+            comboBox1.Items.Add("책이름");
+            comboBox1.Items.Add("출판사");
+
+            comboBox1.SelectedIndex = 0;
+        }
+
+        private void initialize_book_dataSource(object sender, EventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = DataManager.Books;
+        }
+
+        private void search_keydown(object sender, KeyEventArgs e)
+        {
+            //List<Book> searchedBookList = new List<Book>();
+            if (e.KeyCode == Keys.Enter)
+            {
+                button3_click(sender, e);
+
+            }
+
+
+        }
+
+        private void button3_click(object sender, EventArgs e)
+        {
+            string searchWord = textBox4.Text.ToString();
+            List<Book> searchedBookList = new List<Book>();
+            List<Book> originalBookList = DataManager.Books;
+            try
+            {
+
+                if (comboBox1.SelectedIndex == 0)
+                {
+                    foreach (var item in originalBookList)
+                    {
+                        if (item.Name.ToString().EndsWith(searchWord) || item.Name.Contains(searchWord) || item.Name.ToString().StartsWith(searchWord))
+                        {
+                            searchedBookList.Add(item);
+                        }
+                    }
+                }
+                else if (comboBox1.SelectedIndex == 1)
+                {
+                    foreach (var item in originalBookList)
+                    {
+                        if (item.Publisher.ToString().EndsWith(searchWord) || item.Publisher.Contains(searchWord) || item.Publisher.ToString().StartsWith(searchWord))
+                        {
+                            searchedBookList.Add(item);
+                        }
+                    }
+                }
+
+                if(searchedBookList.Count == 0)
+                {
+                    MessageBox.Show("찾는 책이 없습니다.");
+                    return;
+                }
+                
+                dataGridView1.DataSource = null;
+                dataGridView1.Rows.Clear();
+                dataGridView1.Refresh();
+
+                foreach (var item in searchedBookList)
+                {
+                    if(item.isBorrowed)
+                    {
+                        string[] row = { item.Isbn, item.Name, item.Publisher, item.Page.ToString(), item.UserId.ToString(), item.UserName.ToString(), item.isBorrowed.ToString(), item.BorrowedAt.ToString() };
+                        dataGridView1.Rows.Add(row);
+                    } else
+                    {
+                        string[] row = { item.Isbn, item.Name, item.Publisher, item.Page.ToString(), "", "", item.isBorrowed.ToString(), "" };
+                        dataGridView1.Rows.Add(row);
+                    }
+                    
+                }
+
+
+
+                //DataGridViewRow dataGridViewRow = (DataGridViewRow)dataGridView1.Rows[0].Clone();
+                //dataGridViewRow.Cells[0].Value = book.Isbn;
+                //dataGridViewRow.Cells[1].Value = book.Name;
+                //dataGridViewRow.Cells[2].Value = book.Publisher;
+                //dataGridViewRow.Cells[3].Value = book.Page.ToString();
+
+                //dataGridViewRow.Cells[6].Value = book.isBorrowed.ToString();
+                //if(book.isBorrowed)
+                //{
+                //    dataGridViewRow.Cells[7].Value = book.BorrowedAt.ToString();
+                //    dataGridViewRow.Cells[4].Value = book.UserId.ToString();
+                //    dataGridViewRow.Cells[5].Value = book.UserName.ToString();
+                //}
+
+                //dataGridView1.Rows.Add(dataGridViewRow);
+
+            } catch(Exception exception)
+            {
+                MessageBox.Show("찾는 책이 없습니다.");
+            }
+
+            
+            //dataGridView1.Rows.Clear();
+            //dataGridView1.Refresh();
+
+            //try
+            //{
+
+
+            
+            //    //dataGridView1.DataSource = book;
+            //} catch(Exception exception)
+            //{
+            //    MessageBox.Show("찾는 책이 없습니다.");
+            //}
+
+
+            //dataGridView1.DataSource = null;
+            //dataGridView1.DataSource = DataManager.Books;
+            //DataManager.Save();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
