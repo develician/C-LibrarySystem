@@ -15,6 +15,7 @@ namespace LibrarySystem
         public static CurrencyManager currencyManagerBook;
         public Form2()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             currencyManagerBook = (CurrencyManager)this.BindingContext[DataManager.Books];
 

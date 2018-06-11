@@ -18,6 +18,7 @@ namespace LibrarySystem
         public static CurrencyManager currencyManagerUser;
         public Form1()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             currencyManagerBook = (CurrencyManager)this.BindingContext[DataManager.Books];
             currencyManagerUser = (CurrencyManager)this.BindingContext[DataManager.Users];
@@ -49,6 +50,8 @@ namespace LibrarySystem
 
             dataGridView2.Columns[0].HeaderText = "회원 Id";
             dataGridView2.Columns[1].HeaderText = "회원 이름";
+            dataGridView2.Columns[2].HeaderText = "연락처";
+            dataGridView2.Columns[3].HeaderText = "대출수";
 
             dataGridView1.CurrentCellChanged += dataGridView1_CurrentCellChanged;
             dataGridView2.CurrentCellChanged += dataGridView2_CurrentCellChanged;
@@ -257,13 +260,23 @@ namespace LibrarySystem
                 }
 
                 User user = DataManager.Users.Single((x) => x.Id.ToString() == textBox3.Text);
+
+                if(user.borrowedNumber > 2)
+                {
+                    MessageBox.Show("최대 대여개수를 초과했습니다.");
+                    return;
+                }
+
                 book.UserId = user.Id;
                 book.UserName = user.Name;
                 book.isBorrowed = true;
                 book.BorrowedAt = DateTime.Now;
+                user.borrowedNumber = user.borrowedNumber + 1;
 
                 dataGridView1.DataSource = null;
                 dataGridView1.DataSource = DataManager.Books;
+                dataGridView2.DataSource = null;
+                dataGridView2.DataSource = DataManager.Users;
                 DataManager.Save();
 
                 MessageBox.Show(book.Name + "도서가 " + user.Name + "님께 대여되었습니다.");
@@ -292,9 +305,12 @@ namespace LibrarySystem
                     book.UserName = "";
                     book.isBorrowed = false;
                     book.BorrowedAt = new DateTime();
+                    user.borrowedNumber = user.borrowedNumber - 1;
 
                     dataGridView1.DataSource = null;
                     dataGridView1.DataSource = DataManager.Books;
+                    dataGridView2.DataSource = null;
+                    dataGridView2.DataSource = DataManager.Users;
                     DataManager.Save();
 
                     if(book.BorrowedAt.AddDays(7) > DateTime.Now)

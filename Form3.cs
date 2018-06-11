@@ -15,6 +15,7 @@ namespace LibrarySystem
         public static CurrencyManager currencyManagerUser;
         public Form3()
         {
+            this.StartPosition = FormStartPosition.CenterScreen;
             InitializeComponent();
             currencyManagerUser = (CurrencyManager)this.BindingContext[DataManager.Users];
             dataGridView1.DataSource = DataManager.Users;

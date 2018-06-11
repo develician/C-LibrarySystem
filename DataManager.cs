@@ -51,7 +51,8 @@ namespace LibrarySystem
                          {
                              Id = int.Parse(item.Element("id").Value),
                              Name = item.Element("name").Value,
-                             Phone= item.Element("phone").Value
+                             Phone= item.Element("phone").Value,
+                             borrowedNumber = int.Parse(item.Element("borrowedNumber").Value)
                          }).ToList<User>();
 
             }
@@ -90,6 +91,7 @@ namespace LibrarySystem
                 usersOutput += "    <id>" + item.Id + "</id>\n";
                 usersOutput += "    <name>" + item.Name + "</name>\n";
                 usersOutput += "    <phone>" + item.Phone + "</phone>\n";
+                usersOutput += "    <borrowedNumber>" + item.borrowedNumber + "</borrowedNumber>\n";
                 usersOutput += "</user>\n";
             }
             usersOutput += "</users>";
